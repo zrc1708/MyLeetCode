@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>14. 最长公共前缀</title>
+</head>
+
+<body>
+    <p>
+        编写一个函数来查找字符串数组中的最长公共前缀。<br>
+
+        如果不存在公共前缀，返回空字符串 ""。<br>
+
+        示例 1:<br>
+
+        输入: ["flower","flow","flight"]<br>
+        输出: "fl"<br>
+        示例 2:<br>
+
+        输入: ["dog","racecar","car"]<br>
+        输出: ""<br>
+        解释: 输入不存在公共前缀。<br>
+        说明:<br>
+
+        所有输入只包含小写字母 a-z 。
+    </p>
+    <script>
+        /**
+         * @param {string[]} strs
+         * @return {string}
+         */
+        var longestCommonPrefix = function (strs) {
+            if(strs.length===0){
+                return ''
+            }else if(strs.length===1){
+                return strs[0]
+            }
+            let min = strs[0]
+            if(min.length===0){
+                return ''
+            }
+            let minIndex = 0
+            // 找出最短的字符串
+            for (let index = 1; index < strs.length; index++) {
+                if(strs[index].length===0){
+                    return ''
+                }else if(min.length>strs[index].length){
+                    min = strs[index]
+                    minIndex = index
+                }
+            }
+            // 去除数组中的最小字符串加快遍历
+            strs.splice(minIndex,1)
+            for (let i = 0; i < min.length; i++) {
+                for (let j = 0; j < strs.length; j++) {
+                    if(min[i]!==strs[j][i]){
+                        return min.substr(0,i)
+                    }
+                }    
+            }
+            return min
+        };
+        console.log(longestCommonPrefix(["c","c"]))
+    </script>
+</body>
+
+</html>
