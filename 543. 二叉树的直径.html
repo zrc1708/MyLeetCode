@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>543. 二叉树的直径</title>
 </head>
+
 <body>
     <script>
         /*
@@ -23,7 +25,7 @@
 
         注意：两结点之间的路径长度是以它们之间边的数目表示。
         */
-       /**
+        /**
          * Definition for a binary tree node.
          * function TreeNode(val) {
          *     this.val = val;
@@ -34,30 +36,22 @@
          * @param {TreeNode} root
          * @return {number}
          */
-        var diameterOfBinaryTree = function(root) {
-            // 求树的最大深度方法
-            var maxDepth = function(root) {
-                if(!root){
+        var diameterOfBinaryTree = function (root) {
+            var maxDepth = function (root) {
+                if (!root) {
                     return 0
-                }else{
+                } else {
                     const left = maxDepth(root.left)
                     const right = maxDepth(root.right)
-                    return Math.max(left,right)+1
+                    return Math.max(left, right) + 1
                 }
             };
-            // 求经过当前结点最长路径方法
-            var maxLength = function (root) {
-                if(!root) return 0
-                if(!root.left&&!root.right) return 0
-                if(!root.left) return maxDepth(root.right)
-                if(!root.right) return maxDepth(root.left)
-                return maxDepth(root.left)+maxDepth(root.right)
-            }
-            
+
             let num = 0
-            var getDiamater = function(root){
-                if(!root) return 0
-                if(maxLength(root)>num) num = maxLength(root)
+            var getDiamater = function (root) {
+                if (!root) return 0
+                let maxLength = maxDepth(root.left) + maxDepth(root.right)
+                if (maxLength > num) num = maxLength
                 getDiamater(root.left)
                 getDiamater(root.right)
             }
@@ -70,4 +64,5 @@
         */
     </script>
 </body>
+
 </html>
