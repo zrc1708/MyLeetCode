@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>160. 相交链表</title>
+</head>
+
+<body>
+    <img src="https://s1.ax1x.com/2020/07/14/Uaay7j.png" alt="Uaay7j.png" border="0" />
+    <script>
+        /**
+         * Definition for singly-linked list.
+         * function ListNode(val) {
+         *     this.val = val;
+         *     this.next = null;
+         * }
+         */
+
+        /**
+         * @param {ListNode} headA
+         * @param {ListNode} headB
+         * @return {ListNode}
+         */
+        //  标记法，双重遍历，虽然不符合题目要求，但是非常好懂
+        var getIntersectionNode1 = function (headA, headB) {
+            while (headA) {
+                headA.flag = true
+                headA = headA.next
+            }
+            while (headB) {
+                if (headB.flag) return headB
+                headB = headB.next
+            }
+        };
+        /*
+        双指针法。初始化两个指针pA和pB分别指向headA和headB，
+        每次pA和pB各走一步，当pA触底后变轨到headB，
+        同理，当pB触底后变轨到headA。这样就只需遍历（A的非公共部分+B的非公共部分+AB的公共部分）。
+        */
+        var getIntersectionNode = function(headA, headB) {
+            let pA = headA
+            let pB = headB
+            while(pA!==pB){
+                if(pA) 
+                    pA = pA.next
+                else
+                    pA = headB
+                if(pB) 
+                    pB = pB.next
+                else
+                    pB = headA
+            }
+            return pA
+        };
+
+
+    </script>
+</body>
+
+</html>
