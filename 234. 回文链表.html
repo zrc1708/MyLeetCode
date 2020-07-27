@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width='device-width', initial-scale=1.0">
+    <title>234. 回文链表</title>
+</head>
+<body>
+    <script>
+        /*
+        请判断一个链表是否为回文链表。
+
+        示例 1:
+
+        输入: 1->2
+        输出: false
+        示例 2:
+
+        输入: 1->2->2->1
+        输出: true
+        进阶：
+        你能否用 O(n) 时间复杂度和 O(1) 空间复杂度解决此题？
+        */
+        /**
+        * Definition for singly-linked list.
+        * function ListNode(val) {
+        *     this.val = val;
+        *     this.next = null;
+        * }
+        */
+        /**
+        * @param {ListNode} head
+        * @return {boolean}
+        */
+        var isPalindrome = function(head) {
+            if(!head) return true
+            let arr=[]
+            function read(head){
+                if(!head) return
+                arr.push(head.val)
+                read(head.next)
+            }
+            read(head)
+            let length = arr.length
+            let flag = false
+            for (let index = 0; index < Math.floor(length/2); index++) {
+                if(arr[index]!==arr[length-1-index]){
+                    flag = true
+                    break
+                }
+            }
+            if(flag) return false
+            return true
+        };
+
+    </script>
+</body>
+</html>
