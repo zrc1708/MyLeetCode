@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>448. 找到所有数组中消失的数字</title>
+</head>
+<body>
+    <script>
+        /*
+        给定一个范围在  1 ≤ a[i] ≤ n ( n = 数组大小 ) 的 整型数组，数组中的元素一些出现了两次，另一些只出现一次。
+
+        找到所有在 [1, n] 范围之间没有出现在数组中的数字。
+
+        您能在不使用额外空间且时间复杂度为O(n)的情况下完成这个任务吗? 你可以假定返回的数组不算在额外空间内。
+
+        示例:
+
+        输入:
+        [4,3,2,7,8,2,3,1]
+
+        输出:
+        [5,6]
+        */
+        /**
+        * @param {number[]} nums
+        * @return {number[]}
+        */
+        // var findDisappearedNumbers = function(nums) {
+        //     nums = nums.sort()
+        //     let arr = []
+        //     for (let index = 1; index <= nums.length; index++) {
+        //         arr.push(index)
+        //     }
+        //     for (let index = 0; index < nums.length; index++) {
+        //         for (let j = 0; j < nums.length; j++) {
+        //             if(nums[index]==arr[j]){
+        //                 arr.splice(j,1)
+        //                 break
+        //             }
+        //         }
+        //     }
+        //     return arr
+        // };
+        var findDisappearedNumbers = function(nums) {
+            // 题目分析：找出未出现的数字
+            // 规律 1 <= a <= n
+            // 标记清除法 原地 O(n)
+            const ans = []
+            if (nums && Array.isArray(nums) && nums.length > 0) {
+                // 需要结合数组索引与取值范围的特性
+                // [4,3,2,7,8,2,3,1]
+                // 我们需要注意一个特性：由于它是满足 1 <= a <= n
+                // 那么就存在一个关系 a[i-1] = i。每一个数都有一个索引对应
+                // 假设第一个是4 说明在索引为3的地方就有对应的值了，我们通过标记为负数来记住，这个坑有人。
+                nums.forEach(item => {
+                    if (nums[Math.abs(item)-1] > 0) {
+                        nums[Math.abs(item)-1] *= -1 // 标记这个位置坑已经被占了
+                    }
+                })
+                console.log(nums)
+                // 第二次循环找出丢失得值
+                nums.forEach((item, index) => {
+                    if (item > 0) {
+                        ans.push(index + 1)
+                    }
+                })
+            }
+            return ans
+        };
+        console.log(findDisappearedNumbers([4,3,2,7,8,2,3,1]))
+    </script>
+</body>
+</html>
