@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * @param {string} s
+         * @return {number}
+         */
+        var lengthOfLongestSubstring = function (s) {
+            let str = ''
+            let maxLength = 0
+            for (let index = 0; index < s.length; index++) {
+                if(str.indexOf(s[index])==-1){
+                    str += s[index]
+                }else{
+                    maxLength = Math.max(maxLength,str.length)
+                    str = str.substring(str.indexOf(s[index])+1) + s[index]
+                }
+            }
+            return Math.max(maxLength,str.length)
+        };
+        console.log(lengthOfLongestSubstring("dvdf"))
+    </script>
+</body>
+
+</html>
