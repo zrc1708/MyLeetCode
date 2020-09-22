@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * @param {number[]} nums1
+         * @param {number} m
+         * @param {number[]} nums2
+         * @param {number} n
+         * @return {void} Do not return anything, modify nums1 in-place instead.
+         */
+        var merge = function (nums1, m, nums2, n) {
+            for (let i = 0; i < n; i++) {
+                let flag = false
+                let tmp
+
+                for (let j = 0; j < m+i; j++) {
+                    if(flag){
+                        tt = nums1[j]
+                        nums1[j]=tmp
+                        tmp = tt
+                    }else{
+                        if(nums2[i]<nums1[j]){
+                            tmp = nums1[j]
+                            flag = true
+                            nums1[j]=nums2[i]
+                        }
+                    }
+                }
+
+                if(!flag){
+                    nums1[m+i+1] = nums2[i]
+                }
+            }
+        };
+        /*
+        辣鸡自创方法
+        数组2的值挨个从数组1开始遍历
+        遇到比自己大的，就把自己覆盖上去，当然，先将要被覆盖的值保存，同时改变flag
+        随后的遍历，就是将数组1之后的值挨个后移
+        执行用时：96 ms, 在所有 JavaScript 提交中击败了15.73%的用户
+        内存消耗：37.5 MB, 在所有 JavaScript 提交中击败了7.88%的用户
+        */
+
+        var merge = function(nums1, m, nums2, n) {
+            nums1.splice(m)
+            nums2.splice(n)
+            nums1.push(...nums2);
+            nums1.sort((a,b) => a-b);
+        };
+    </script>
+</body>
+
+</html>
