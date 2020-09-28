@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * @param {string} s
+         * @return {string}
+         */
+        var decodeString = function (s) {
+            // 每次遍历解码一次，直到解码完毕
+            while(/\d+\[[a-z]+\]/.test(s)){
+                s = tostr(s)
+            }
+            // 将第一个无嵌套的字符串（最内部的字符串）解码
+            function tostr(s) {
+                let str = ''
+                let flag = false
+                let num = 0
+                let numarr = []
+                let [strleft,strright] = ['','']
+
+                // 遍历整个字符串
+                for (let i = 0; i < s.length; i++) {
+                    if (/[0-9]/.test(s[i])) {
+                        num = num*10 + Number(s[i])
+                    } else if (/\[/.test(s[i])) {
+                        // 将所有遍历到的数字存进数组
+                        numarr.push(num)
+                        num = 0
+                        left = i + 1
+                        flag = true
+                    } else if (/\]/.test(s[i]) && flag) {
+                        strleft = s.substring(0, left - 1).replace(/[0-9]+$/,'')
+                        strright = s.substring(i + 1, s.length)
+                        // 数组的最后一位，即最新的数字，就是要重复的次数
+                        str = s.substring(left, i).repeat(numarr[numarr.length-1])
+                        num = 0
+                        flag = false
+                    }
+                }
+
+                return strleft+str+strright
+            }
+            return s
+        };
+        /*
+        自创辣鸡方法
+        执行用时：76 ms, 在所有 JavaScript 提交中击败了74.67%的用户
+        内存消耗：37.5 MB, 在所有 JavaScript 提交中击败了5.07%的用户
+        */
+        console.log(decodeString("3[a2[c]]"))
+    </script>
+</body>
+
+</html>
