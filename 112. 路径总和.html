@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * Definition for a binary tree node.
+         * function TreeNode(val) {
+         *     this.val = val;
+         *     this.left = this.right = null;
+         * }
+         */
+        /**
+         * @param {TreeNode} root
+         * @param {number} sum
+         * @return {boolean}
+         */
+        var hasPathSum = function (root, sum) {
+            if(!root){
+                return false
+            }
+            sum -= root.val
+            if(!root.left&&!root.right&&sum==0){
+                return true
+            }else{
+                return hasPathSum(root.left,sum)||hasPathSum(root.right,sum)
+            }
+        };
+        /*
+        执行用时：92 ms, 在所有 JavaScript 提交中击败了61.64%的用户
+        内存消耗：41.2 MB, 在所有 JavaScript 提交中击败了19.44%的用户
+        */
+    </script>
+</body>
+
+</html>
