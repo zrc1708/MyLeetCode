@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * @param {character[][]} matrix
+         * @return {number}
+         */
+        var maximalSquare = function (matrix) {
+            let max = 0
+            for (let i = 0; i < matrix.length; i++) {
+                for (let j = 0; j < matrix[0].length; j++) {
+                    if(matrix[i][j]==0){
+                        max = Math.max(max,0)
+                    }else{
+                        max = Math.max(max,maxSquare(i,j,matrix))
+                    }
+                }
+            }
+            return max
+        };
+
+        function maxSquare(i, j, matrix) {
+            newi = i + 1
+            newj = j + 1
+            let flag = true
+            while (flag) {
+                if (newi < matrix.length && newj < matrix[0].length) {
+                    for (let x = j; x <= newj; x++) {
+                        if (matrix[newi][x] == 0) {
+                            flag = false
+                            break
+                        }
+                    }
+                    if(flag){
+                        for (let y = i; y <= newi; y++) {
+                            if (matrix[y][newj] == 0) {
+                                flag = false
+                                break
+                            }
+                        }
+                    }
+                    if(flag){
+                        newi++
+                        newj++ 
+                    }
+                } else {
+                    flag = false
+                }
+            }
+            return Math.pow(newi - i,2)
+        }
+
+        /*
+        执行用时：108 ms, 在所有 JavaScript 提交中击败了35.59%的用户
+        内存消耗：40.1 MB, 在所有 JavaScript 提交中击败了36.26%的用户
+        */
+
+        let arr = [["0"]]
+        console.log(maximalSquare(arr))
+    </script>
+</body>
+
+</html>
