@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * @param {number} n
+         * @return {string[]}
+         */
+        var generateParenthesis = function (n) {
+            let arr = []
+            function get(left,right,n,path){
+                // 不合法的情况，提前结束
+                if(left > n ||left < right){
+                    return
+                }
+                if(left + right == 2*n){
+                    arr.push(path)
+                    return
+                }
+                get(left + 1, right, n, path + '(')
+                get(left , right + 1, n, path + ')')
+            }
+            get(0,0,n,'')
+            return arr
+        };
+        /*
+        执行用时：84 ms, 在所有 JavaScript 提交中击败了75.10%的用户
+        内存消耗：39.2 MB, 在所有 JavaScript 提交中击败了21.09%的用户
+        */
+    </script>
+</body>
+
+</html>
