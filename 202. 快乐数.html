@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * @param {number} n
+         * @return {boolean}
+         */
+        //  此方法leetcode超时！！！！！！但觉得还是可以记录一下
+        // var isHappy = function (n) {
+        //     let flag = false
+        //     function ishappy(n) {
+        //         let str = n + ''
+        //         let sum = 0
+        //         for (const num of str) {
+        //             sum += parseInt(num) ** 2
+        //         }
+        //         if (sum == 1) {
+        //             flag = true
+        //             return
+        //         } else {
+        //             return ishappy(sum)
+        //         }
+        //     }
+        //     try{
+        //         ishappy(n)
+        //     }catch(err){
+        //         return flag
+        //     }
+        //     return flag
+        // };
+
+
+        var isHappy = function (n) {
+            let arr = []
+
+            function ishappy(n) {
+                let str = n + ''
+                let sum = 0
+                for (const num of str) {
+                    sum += parseInt(num) ** 2
+                }
+                if (sum == 1) {
+                    return true
+                } else {
+                    if(arr.indexOf(sum)==-1){
+                        arr.push(sum)
+                        return ishappy(sum)
+                    }else{
+                        return false
+                    }
+                }
+            }
+
+            return ishappy(n)
+        };
+
+        // 补充知识：不快乐数连续平方求和，会在["4", "16", "37", "58", "89", "145", "42", "20", "4 "]中循环!!!
+        console.log(isHappy(19))
+
+        /*
+        执行用时：96 ms, 在所有 JavaScript 提交中击败了61.28%的用户
+        内存消耗：39.6 MB, 在所有 JavaScript 提交中击败了19.01%的用户
+        */
+    </script>
+</body>
+
+</html>
