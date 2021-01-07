@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+        * @param {string[]} strs
+        * @param {number} m
+        * @param {number} n
+        * @return {number}
+        */
+        var findMaxForm = function(strs, m, n) {
+            // 初始化结果表
+            let arr = []
+            for (let i = 0; i <= m; i++) {
+                arr[i] = new Array(n+1).fill(0)
+            }
+
+            // 计算结果
+            strs.forEach(item=>{
+                // 统计目标的0和1的数量
+                let str = item.replace(/0/g,'')
+                let i = item.length-str.length  // 0 的数量
+                let j = str.length  // 1 的数量
+                for (let a = m; a >= 0; a--) {
+                    for (let b = n; b >= 0; b--) {
+                        if(i<=a&&j<=b){
+                            arr[a][b]=Math.max(1+arr[a-i][b-j],arr[a][b])
+                        }
+                    }
+                }
+            })
+
+            // 找出最大值
+            let max = 0
+            for (let a = m; a >= 0; a--) {
+                for (let b = n; b >= 0; b--) {
+                    max = Math.max(max,arr[a][b])
+                }
+            }
+            return max
+        };
+        // console.log(findMaxForm(["10"],3,2));
+        console.log(findMaxForm(["10", "0001", "111001", "1", "0"], 5, 3));
+    </script>
+</body>
+</html>
