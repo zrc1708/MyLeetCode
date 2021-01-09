@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+         * Definition for singly-linked list.
+         * function ListNode(val, next) {
+         *     this.val = (val===undefined ? 0 : val)
+         *     this.next = (next===undefined ? null : next)
+         * }
+         */
+        /**
+         * @param {ListNode} l1
+         * @param {ListNode} l2
+         * @return {ListNode}
+         */
+         var addTwoNumbers = function(l1, l2) {
+            //  将结果保存到l1上
+            let mirror = l1
+            let flag = 0
+            let l1end=false
+            let l2end=false
+            let father
+            while(true){
+                // 两者都到头，需进位
+                if(flag==1&&l1end&&l2end){
+                    l1.val=1
+                    break
+                }else if(l1end&&l2end){
+                    // 无需进位，删去定义的空节点
+                    father.next = null
+                    break
+                }
+
+                if(flag==1){
+                    l1.val = l1.val+l2.val+1
+                }else{
+                    l1.val = l1.val+l2.val
+                }
+                flag = 0
+                if(l1.val>=10){
+                    l1.val-=10
+                    flag=1
+                }
+
+                // 一长一短或一起结束，链表后续设为0，可继续相加，无影响
+                if(!l1.next){
+                    l1.next = new ListNode()
+                    l1end = true
+                }
+                // 保存一下父级，如果无需进位，通过父级删去多余的一位
+                father = l1
+                l1=l1.next
+                if(!l2.next){
+                    l2.next = new ListNode()
+                    l2end = true
+                }
+                l2=l2.next
+            }
+            return mirror
+        };
+        /*
+        执行用时：132 ms, 在所有 JavaScript 提交中击败了88.12%的用户
+        内存消耗：43 MB, 在所有 JavaScript 提交中击败了51.68%的用户
+        */
+    </script>
+</body>
+</html>
