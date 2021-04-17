@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+        * Definition for singly-linked list.
+        * function ListNode(val, next) {
+        *     this.val = (val===undefined ? 0 : val)
+        *     this.next = (next===undefined ? null : next)
+        * }
+        */
+        /**
+        * @param {ListNode} head
+        * @return {ListNode}
+        */
+        var sortList = function(head) {
+            const arr = []
+            while(head){
+                arr.push(head.val)
+                head = head.next
+            }
+            arr.sort((a,b)=>a-b)
+            const start = new ListNode()
+            let last
+            arr.forEach((item,index)=>{
+                if(index==0){
+                    start.val = item
+                    last = start
+                }else{
+                    const node = new ListNode(item)
+                    last.next = node
+                    last = node
+                }
+            })
+            return start
+        };
+    </script>
+</body>
+</html>
