@@ -48,6 +48,24 @@
             if(!root) return 0
             return Math.max(maxDepth(root.left),maxDepth(root.right))+1
         };
+
+        // 广度优先遍历（非递归）
+        var maxDepth = function(root) {
+            if(!root) return 0
+            let arr = [root]
+            let depth = 1
+            while (arr.length) {
+                let length = arr.length
+                for (let i = 0; i < length; i++) {
+                    const item = arr.shift()
+                    if (item.left) arr.push(item.left);
+                    if (item.right) arr.push(item.right);
+                }
+                // 当前层所有节点已经出列，如果队列不为空，说明有下一层节点，depth+1
+                if (arr.length) depth++;
+            }
+            return depth
+        };
     </script>
 </body>
 </html>
