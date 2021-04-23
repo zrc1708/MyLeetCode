@@ -47,6 +47,22 @@
             root.right = sortedArrayToBST(nums.splice(1));
             return root;
         };
+
+        // 自创解法
+        /*
+        执行用时：80 ms, 在所有 JavaScript 提交中击败了99.44%的用户
+        内存消耗：41.2 MB, 在所有 JavaScript 提交中击败了25.45%的用户
+        */
+        var sortedArrayToBST = function(nums) {
+            const index = Math.floor(nums.length/2)
+            const leftArr = nums.splice(0,index)
+            const rightArr = nums.splice(1,nums.length - 1)
+
+            const root = new TreeNode(nums[0])
+            if(leftArr.length) root.left = sortedArrayToBST(leftArr)
+            if(rightArr.length) root.right = sortedArrayToBST(rightArr)
+            return root
+        };
     </script>
 </body>
 

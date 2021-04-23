@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+         * @param {number[]} nums
+         * @return {number[][]}
+         */
+        var threeSum = function(nums) {
+            const ansArr = []
+            nums.sort((a,b)=>a-b)
+            for (let i = 0; i < nums.length; i++) {
+                if(nums[i]>0) break
+                if(i > 0 && nums[i] == nums[i-1]) continue; // 去重
+                let left = i+1
+                let right = nums.length-1
+                while(left<right){
+                    let sum = nums[i]+nums[left]+nums[right]
+                    if(sum<0){
+                        left++
+                    }else if(sum>0){
+                        right--
+                    }else if(sum===0){
+                        ansArr.push([nums[i],nums[left],nums[right]])
+                        while (left<right && nums[left] == nums[left+1]) left++; // 去重
+                        while (left<right && nums[right] == nums[right-1]) right--; // 去重
+                        left++
+                        right--
+                    }
+                }
+            }
+            return ansArr
+        };
+
+        console.log(threeSum([-4,-2,-2,-2,0,1,2,2,2,3,3,4,4,6,6]))
+    </script>
+</body>
+</html>
