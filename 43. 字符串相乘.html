@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+         * @param {string} num1
+         * @param {string} num2
+         * @return {string}
+         */
+        var multiply = function(num1, num2) {
+            let flag
+            function mul(num1,num2){
+                let resArr = []
+                for (let i = num1.length-1; i >=0 ; i--) {
+                    let one = Number(num1[i])
+                    let two = Number(num2)
+                    let result = one * two + Number(flag)
+                    if(result>=10){
+                        flag = (result+'').slice(0,1)
+                        result = (result+'').slice(1,2)
+                    }else{
+                        flag = 0
+                    }
+                    resArr.unshift(result)
+                }
+                if(flag>0) resArr.unshift(flag)
+                return resArr.join('')
+            }
+            function add(num1,num2,zero){
+                for (let i = 0; i < zero; i++) {
+                    num2+='0'
+                }
+                if(num1.length<num2.length){
+                    let t = num1
+                    num1 = num2
+                    num2 = t
+                }
+                if(typeof num2==='string'){
+                    num2 ='0'.repeat(num1.length-num2.length)+num2
+                }else{
+                    num2 ='0'.repeat(num1.length-num2.length)+num2.join('')
+                }
+
+                let resArr = []
+                for (let i = num1.length-1; i >=0 ; i--) {
+                    let one = Number(num1[i])
+                    let two = Number(num2[i])
+                    let result = one + two + flag
+                    if(result>=10){
+                        flag = 1
+                        result = (result+'').slice(1,2)
+                    }else{
+                        flag = 0
+                    }
+                    resArr.unshift(result)
+                }
+                if(flag>0) resArr.unshift(flag)
+                return resArr
+            }
+
+            if(num1.length<num2.length){
+                let t = num1
+                num1 = num2
+                num2 = t
+            }
+            let ans = []
+            for (let i = num2.length-1; i >= 0; i--) {
+                flag = 0
+                let mulNum = mul(num1,num2[i])
+                flag = 0
+                ans = add(ans,mulNum,num2.length-1-i)
+            }
+            if(num1==0||num2==0){
+                return '0'
+            }else {
+                return ans.join('')
+            }
+        };
+        console.log(multiply('237','284'))
+    </script>
+</body>
+</html>

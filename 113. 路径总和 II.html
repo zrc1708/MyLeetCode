@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+        * Definition for a binary tree node.
+        * function TreeNode(val, left, right) {
+        *     this.val = (val===undefined ? 0 : val)
+        *     this.left = (left===undefined ? null : left)
+        *     this.right = (right===undefined ? null : right)
+        * }
+        */
+        /**
+        * @param {TreeNode} root
+        * @param {number} targetSum
+        * @return {number[][]}
+        */
+        var pathSum = function(root, targetSum) {
+            let ansArr = []
+            function getSum(root,arr,val){
+                if(!root) return
+                if(!root.left && !root.right){
+                    if(root.val==val){
+                        return ansArr.push([...arr,root.val])
+                    }else{
+                        return
+                    }
+                }else{
+                    getSum(root.left,[...arr,root.val],val-root.val)
+                    getSum(root.right,[...arr,root.val],val-root.val)
+                }
+            }
+            getSum(root,[],targetSum)
+            return ansArr
+        };
+        /*
+        执行用时：112 ms, 在所有 JavaScript 提交中击败了36.35%的用户
+        内存消耗：49.3 MB, 在所有 JavaScript 提交中击败了5.05%的用户
+        */
+    </script>
+</body>
+</html>

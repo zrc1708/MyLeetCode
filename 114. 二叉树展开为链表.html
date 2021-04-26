@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+         * Definition for a binary tree node.
+         * function TreeNode(val, left, right) {
+         *     this.val = (val===undefined ? 0 : val)
+         *     this.left = (left===undefined ? null : left)
+         *     this.right = (right===undefined ? null : right)
+         * }
+         */
+        /**
+         * @param {TreeNode} root
+         * @return {void} Do not return anything, modify root in-place instead.
+         */
+        var flatten = function(root) {
+            function change(root){
+                let start = root
+                if(root.left){
+                    let t = root.right
+                    root.right = root.left
+                    while(root.right){
+                        root = root.right
+                    }
+                    root.right = t
+                }
+                start.left = null
+            }
+            function start(root){
+                if(!root) return
+                start(root.left)
+                start(root.right)
+                change(root)
+            }
+            start(root)
+        };
+    </script>
+</body>
+</html>
