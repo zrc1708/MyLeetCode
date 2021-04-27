@@ -55,6 +55,17 @@
             }
             return bigest
         };
+
+        // 自创
+        var maxProfit = function(prices) {
+            let min = Math.min(prices[0],prices[1])
+            let ans = prices[1]-prices[0]>0?prices[1]-prices[0]:0
+            for(let i=2;i<prices.length;i++){
+                ans = Math.max(prices[i]-min,ans)
+                min = Math.min(min,prices[i])
+            }
+            return ans
+        };
         console.log(maxProfit([7,6,4,3,1]))
     </script>
 </body>

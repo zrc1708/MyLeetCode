@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+         * Definition for a binary tree node.
+         * function TreeNode(val) {
+         *     this.val = val;
+         *     this.left = this.right = null;
+         * }
+         */
+
+        /**
+         * @param {TreeNode} root
+         * @param {TreeNode} p
+         * @param {TreeNode} q
+         * @return {TreeNode}
+         */
+        var lowestCommonAncestor = function(root, p, q) {
+            let ans = root
+            if(p.val>q.val){
+                [p,q]=[q,p]
+            }
+            function find(root){
+                if(!root) return
+                if(root.val>=p.val&&root.val<=q.val){
+                    ans = root
+                }else if(p.val<=root.val&&q.val<=root.val){
+                    find(root.left)
+                }else if(p.val>=root.val&&q.val>=root.val){
+                    find(root.right)
+                }
+            }
+            find(root)
+            return ans
+        };
+    </script>
+</body>
+</html>
