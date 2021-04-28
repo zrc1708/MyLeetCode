@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+         * @param {number[]} nums
+         * @return {number}
+         */
+        var maxSubArray = function(nums) {
+            let last = nums[0]
+            let max = nums[0]
+            for (let i = 1; i < nums.length; i++) {
+                last = Math.max(last+nums[i],nums[i])
+                max = Math.max(last,max)
+            }
+            return max
+        };
+        console.log(maxSubArray([1,2,-1,-2,2,1,-2,1,4,-5,4]))
+        /*
+        执行用时：88 ms, 在所有 JavaScript 提交中击败了85.86%的用户
+        内存消耗：41.3 MB, 在所有 JavaScript 提交中击败了69.90%的用户
+        */
+    </script>
+</body>
+</html>

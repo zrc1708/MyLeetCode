@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+        * @param {number[]} cost
+        * @return {number}
+        */
+        var minCostClimbingStairs = function(cost) {
+            for (let i = 2; i < cost.length; i++) {
+                cost[i] = Math.min(cost[i-2]+cost[i],cost[i-1]+cost[i])
+            }
+            return Math.min(cost[cost.length-1],cost[cost.length-2])
+        };
+        console.log(minCostClimbingStairs([1, 100, 1, 1, 1, 100, 1, 1, 100, 1]))
+        /*
+        执行用时：80 ms, 在所有 JavaScript 提交中击败了94.63%的用户
+        内存消耗：39.4 MB, 在所有 JavaScript 提交中击败了62.27%的用户
+        */
+    </script>
+</body>
+</html>
