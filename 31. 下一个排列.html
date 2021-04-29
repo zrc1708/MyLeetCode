@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+         * @param {number[]} nums
+         * @return {void} Do not return anything, modify nums in-place instead.
+         */
+        var nextPermutation = function(nums) {
+            function change(a,b){
+                let t = nums[a]
+                nums[a] = nums[b]
+                nums[b] = t
+            }
+            let index
+            let flag
+            for (let i = 0; i < nums.length-1; i++) {
+                if(nums[i]<nums[i+1]){
+                    flag = true
+                }else if(nums[i]>nums[i+1]){
+                    flag = false
+                }
+                if(nums[i]<nums[i+1]&&(nums[i+1]>=nums[i+2]||nums[i+2]==undefined)){
+                    index = i
+                }
+            }
+            if(index==undefined){
+                if(flag)
+                    change(nums.length-1,nums.length-2)
+                else
+                    nums.sort((a,b)=>a-b)
+                return
+            }
+            let minIndex = index+1
+            for (let i = index+1; i < nums.length; i++) {
+                if(nums[minIndex]>nums[i]&&nums[i]>nums[index]){
+                    minIndex = i
+                }
+            }
+            change(index,minIndex)
+            // nums.push(...nums.splice(index+1,nums.length-index-1).sort((a,b)=>a-b))
+            for (let i = nums.length-1; i > index+1; i--) {
+                for (let j = index+1; j < i; j++) {
+                    if(nums[j]>nums[j+1]){
+                        change(j,j+1)
+                    }
+                }   
+            }
+        };
+        nextPermutation([3,4,2,5,6,2])
+        /*
+        执行用时：88 ms, 在所有 JavaScript 提交中击败了86.20%的用户
+        内存消耗：40 MB, 在所有 JavaScript 提交中击败了5.68%的用户
+        */
+    </script>
+</body>
+</html>
