@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+         * Definition for singly-linked list.
+         * function ListNode(val, next) {
+         *     this.val = (val===undefined ? 0 : val)
+         *     this.next = (next===undefined ? null : next)
+         * }
+         */
+        /**
+         * @param {ListNode} head
+         * @param {number} x
+         * @return {ListNode}
+         */
+        var partition = function(head, x) {
+            if(!head) return head
+            let myhead = new ListNode(-101,head)
+            let last = myhead
+            let removeList = null
+            let addStart = null
+            while(head){
+                if(head.val>=x){
+                    if(removeList){
+                        removeList.next = head
+                        removeList = head
+                    }else{
+                        removeList = head
+                        addStart = removeList
+                    }
+                    last.next = head.next
+                }else{
+                    last = head
+                }
+                head = head.next
+            }
+            if(removeList) removeList.next = null
+            last.next = addStart
+            return myhead.next
+        };
+        /*
+        执行用时：88 ms, 在所有 JavaScript 提交中击败了75.02%的用户
+        内存消耗：39.3 MB, 在所有 JavaScript 提交中击败了27.58%的用户
+        */
+    </script>
+</body>
+</html>

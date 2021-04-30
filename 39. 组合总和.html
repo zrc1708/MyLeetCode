@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+         * @param {number[]} candidates
+         * @param {number} target
+         * @return {number[][]}
+         */
+        var combinationSum = function(candidates, target) {
+            let ansArr = []
+            function add(arr,sum){
+                if(sum==target){
+                    ansArr.push(arr)
+                    return
+                }else if(sum>target){
+                    return
+                }
+                for (let i = 0; i < candidates.length; i++) {
+                    if(candidates[i]>=(arr[arr.length-1]||0)){
+                        add([...arr,candidates[i]],sum+candidates[i])
+                    }
+                }
+            }
+            add([],0)
+            return ansArr
+        };
+        console.log(combinationSum([2,1],6))
+    </script>
+</body>
+</html>

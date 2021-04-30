@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+         * Definition for singly-linked list.
+         * function ListNode(val, next) {
+         *     this.val = (val===undefined ? 0 : val)
+         *     this.next = (next===undefined ? null : next)
+         * }
+         */
+        /**
+         * @param {ListNode} head
+         * @param {number} k
+         * @return {ListNode}
+         */
+        var rotateRight = function(head, k) {
+            let start = head
+            let start2 = head
+            let end
+            let length = 0
+            while(head){
+                length++
+                end = head
+                head = head.next
+            }
+            if(length==0||k==0) return start
+            while(k>length){
+                k = k-length
+            }
+            if(length==1||length==k) return start
+            let index = 0
+            while(start){
+                index++
+                if(index==length - k){
+                    break
+                }
+                start = start.next
+            }
+            let ans = start.next
+            start.next = null
+            end.next = start2
+            return ans
+        };
+    </script>
+</body>
+</html>
