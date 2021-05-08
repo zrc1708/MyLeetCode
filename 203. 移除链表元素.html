@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+        * Definition for singly-linked list.
+        * function ListNode(val, next) {
+        *     this.val = (val===undefined ? 0 : val)
+        *     this.next = (next===undefined ? null : next)
+        * }
+        */
+        /**
+        * @param {ListNode} head
+        * @param {number} val
+        * @return {ListNode}
+        */
+        var removeElements = function(head, val) {
+            let start = new ListNode('start',head)
+            let last = start
+            while(head){
+                if(head.val==val){
+                    last.next = head.next
+                }else{
+                    last = head
+                }
+                head = head.next
+            }
+            return start.next
+        };
+        /*
+        执行用时：100 ms, 在所有 JavaScript 提交中击败了84.56%的用户
+        内存消耗：42.1 MB, 在所有 JavaScript 提交中击败了95.65%的用户
+        */
+    </script>
+</body>
+</html>
