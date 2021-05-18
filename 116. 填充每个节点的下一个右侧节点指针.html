@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+        * // Definition for a Node.
+        * function Node(val, left, right, next) {
+        *    this.val = val === undefined ? null : val;
+        *    this.left = left === undefined ? null : left;
+        *    this.right = right === undefined ? null : right;
+        *    this.next = next === undefined ? null : next;
+        * };
+        */
+
+        /**
+        * @param {Node} root
+        * @return {Node}
+        */
+        var connect = function(root) {
+            if(!root) return root
+            let arr = [root]
+            while(arr.length){
+                let length = arr.length
+                for (let i = 0; i < length; i++) {
+                    let node = arr[i]
+                    if(i+1==length){
+                        node.next = null
+                    }else{
+                        node.next = arr[i+1]
+                    }
+                    if(node.left){
+                        arr.push(node.left)
+                        arr.push(node.right)
+                    }
+                }
+                arr.splice(0,length)
+            }
+            return root
+        };
+        /*
+        执行用时：120 ms, 在所有 JavaScript 提交中击败了42.67%的用户
+        内存消耗：44.2 MB, 在所有 JavaScript 提交中击败了83.50%的用户
+        */
+    </script>
+</body>
+</html>
